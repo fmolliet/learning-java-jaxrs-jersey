@@ -51,6 +51,12 @@
 			<version>8.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+	        <groupId>com.google.code.gson</groupId>
+	        <artifactId>gson</artifactId>
+	        <version>1.7.1</version>
+	    </dependency>
 
 
 		<!-- uncomment this to get JSON support: <dependency> <groupId>org.glassfish.jersey.media</groupId> 

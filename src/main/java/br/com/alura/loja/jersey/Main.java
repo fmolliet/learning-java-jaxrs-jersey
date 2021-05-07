@@ -21,9 +21,9 @@ public class Main {
      */
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
-        final ResourceConfig rc = new ResourceConfig().packages("br.com.alura.loja.jersey");
+        final ResourceConfig config = new ResourceConfig().packages("br.com.alura.loja.jersey");
         
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), config);
     }
 
     /**
@@ -32,10 +32,7 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        //final HttpServer server = startServer();
-    	ResourceConfig config = new ResourceConfig().packages("br.com.alura.loja.jersey");
-		URI uri = URI.create(BASE_URI);
-		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
+        final HttpServer server = startServer();
 		
 		System.out.println(String.format("Jersey app iniciado e disponivel em"
                 + "%s%nHit Ctrl-C to stop it...", BASE_URI));
