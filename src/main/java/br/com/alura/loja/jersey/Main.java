@@ -12,7 +12,7 @@ import java.net.URI;
  *
  */
 public class Main {
-    // Base URI the Grizzly HTTP server will listen on
+
     public static final String BASE_URI = "http://localhost:8080/";
 
     /**
@@ -37,10 +37,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //final HttpServer server = startServer();
     	ResourceConfig config = new ResourceConfig().packages("br.com.alura.loja.jersey");
-		URI uri = URI.create("http://localhost:8080/");
+		URI uri = URI.create(BASE_URI);
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
 		
-		System.out.println(String.format("Jersey app started with endpoints available at "
+		System.out.println(String.format("Jersey app iniciado e disponivel em"
                 + "%s%nHit Ctrl-C to stop it...", BASE_URI));
 		
 		System.in.read();
