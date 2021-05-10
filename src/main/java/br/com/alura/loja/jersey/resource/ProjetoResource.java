@@ -1,15 +1,22 @@
 package br.com.alura.loja.jersey.resource;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
+import java.net.URI;
 
 import com.thoughtworks.xstream.XStream;
 
+import br.com.alura.loja.jersey.dao.CarrinhoDAO;
 import br.com.alura.loja.jersey.dao.ProjetoDAO;
+import br.com.alura.loja.jersey.modelo.Carrinho;
 import br.com.alura.loja.jersey.modelo.Projeto;
 
 @Path("projetos")
@@ -25,12 +32,20 @@ public class ProjetoResource {
 	}
 	
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	public String adiciona( String conteudo ) {
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response adiciona( String conteudo ) {
 		Projeto projeto = (Projeto ) new XStream().fromXML(conteudo);
 		new ProjetoDAO().adiciona(projeto);
-		
-		return "<status>sucesso</status>";
+		URI uri = URI.create("/projetos/" + projeto.getId());
+		return Response.created(uri).build();
+	}
+	
+	@Path("{id}")
+	@DELETE
+	public Response removeProjeto(@PathParam("id") Long id) {
+		new ProjetoDAO().remove(id);
+
+		return Response.ok().build();
 	}
 
 }

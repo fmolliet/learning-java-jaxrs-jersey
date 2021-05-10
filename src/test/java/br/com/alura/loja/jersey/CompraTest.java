@@ -62,8 +62,12 @@ public class CompraTest {
         
         String xml = carrinho.toXML();
         Entity<String> entity = Entity.entity(xml, MediaType.APPLICATION_XML);
-        Response response = target.path("/carrinhos").request().post(entity);
         
-        Assert.assertEquals("<status>sucesso</status>", response.readEntity(String.class));
+        Response response = target.path("/carrinhos").request().post(entity);
+        Assert.assertEquals(201, response.getStatus());
+        
+        String location = response.getHeaderString("Location");
+        String conteudo = client.target(location).request().get(String.class);
+        Assert.assertTrue(conteudo.contains("Tablet"));
     }
 }
