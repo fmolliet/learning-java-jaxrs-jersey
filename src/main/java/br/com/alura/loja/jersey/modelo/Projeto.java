@@ -10,6 +10,10 @@ public class Projeto {
 	private Long id;
 	
 	private int anoDeInicio;
+	
+	public Projeto() {
+		
+	}
 
 	public Projeto(Long id, String nome, int anoDeInicio) {
 		this.nome = nome;
