@@ -1,6 +1,11 @@
 package br.com.alura.loja.jersey;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +19,7 @@ import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Feature;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -27,8 +33,13 @@ public class CompraTest {
 	public void setUp() throws Exception {
 	    // start the server
 		server = Main.startServer();
+		
+		ClientConfig config = new ClientConfig();
+		Logger logger = Logger.getLogger(CompraTest.class.getName());
+		Feature feature = new LoggingFeature(logger, Level.INFO, null, null);
+		config.register(feature);
 		// create the client
-	    Client client = ClientBuilder.newClient();
+	    Client client = ClientBuilder.newClient( config );
 
 	    target = client.target(Main.BASE_URI);
 	}

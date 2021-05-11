@@ -1,11 +1,22 @@
 package br.com.alura.loja.jersey.modelo;
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Produto {
 	
 	private double preco;
 	private long id;
 	private String nome;
 	private int quantidade;
+	
+	public Produto() {
+		
+	}
 	
 	public Produto(long id, String nome, double preco, int quantidade) {
 		this.id = id;

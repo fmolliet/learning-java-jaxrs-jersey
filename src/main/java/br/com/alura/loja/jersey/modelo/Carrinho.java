@@ -5,14 +5,25 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
+
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+
 import com.google.gson.Gson;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Carrinho {
 	
 	private List<Produto> produtos = new ArrayList<Produto>();
 	private String rua;
 	private String cidade;
 	private long id;
+	
+	public Carrinho() {
+		
+	}
 
 	public Carrinho adiciona(Produto produto) {
 		produtos.add(produto);
